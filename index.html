@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KanFlow – Kanban Board</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-left">
+      <h1>KanFlow</h1>
+      <span class="board-name">My Project Board</span>
+    </div>
+    <div class="header-right">
+      <button class="btn-add-col" onclick="addColumn()">+ Add Column</button>
+    </div>
+  </header>
+
+  <div class="board" id="board">
+
+    <div class="column" data-col="todo">
+      <div class="col-header">
+        <div class="col-title-wrap">
+          <span class="col-dot dot-blue"></span>
+          <h2 class="col-title" contenteditable="true">To Do</h2>
+          <span class="task-count" id="count-todo">0</span>
+        </div>
+        <button class="btn-add-task" onclick="addTask('todo')">+</button>
+      </div>
+      <div class="task-list" id="list-todo" ondragover="onDragOver(event)" ondrop="onDrop(event, 'todo')"></div>
+    </div>
+
+    <div class="column" data-col="inprogress">
+      <div class="col-header">
+        <div class="col-title-wrap">
+          <span class="col-dot dot-yellow"></span>
+          <h2 class="col-title" contenteditable="true">In Progress</h2>
+          <span class="task-count" id="count-inprogress">0</span>
+        </div>
+        <button class="btn-add-task" onclick="addTask('inprogress')">+</button>
+      </div>
+      <div class="task-list" id="list-inprogress" ondragover="onDragOver(event)" ondrop="onDrop(event, 'inprogress')"></div>
+    </div>
+
+    <div class="column" data-col="review">
+      <div class="col-header">
+        <div class="col-title-wrap">
+          <span class="col-dot dot-purple"></span>
+          <h2 class="col-title" contenteditable="true">In Review</h2>
+          <span class="task-count" id="count-review">0</span>
+        </div>
+        <button class="btn-add-task" onclick="addTask('review')">+</button>
+      </div>
+      <div class="task-list" id="list-review" ondragover="onDragOver(event)" ondrop="onDrop(event, 'review')"></div>
+    </div>
+
+    <div class="column" data-col="done">
+      <div class="col-header">
+        <div class="col-title-wrap">
+          <span class="col-dot dot-green"></span>
+          <h2 class="col-title" contenteditable="true">Done</h2>
+          <span class="task-count" id="count-done">0</span>
+        </div>
+        <button class="btn-add-task" onclick="addTask('done')">+</button>
+      </div>
+      <div class="task-list" id="list-done" ondragover="onDragOver(event)" ondrop="onDrop(event, 'done')"></div>
+    </div>
+
+  </div>
+
+  <!-- Task Modal -->
+  <div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal()"></div>
+  <div class="modal hidden" id="task-modal">
+    <h3 id="modal-title">Add Task</h3>
+    <input type="text" id="modal-task-title" placeholder="Task title..." />
+    <textarea id="modal-task-desc" placeholder="Description (optional)..." rows="3"></textarea>
+    <div class="modal-row">
+      <select id="modal-priority">
+        <option value="low">🟢 Low Priority</option>
+        <option value="medium" selected>🟡 Medium Priority</option>
+        <option value="high">🔴 High Priority</option>
+      </select>
+      <input type="date" id="modal-due" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveTask()">Save Task</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
